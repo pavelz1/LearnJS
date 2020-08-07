@@ -1,16 +1,18 @@
 // Объявим переменные
-let money = 10; // Деньги
+let money; // Деньги
+money = 100;
 
-let income = 100; // доход
+let income; // доход
 
-let addExpenses = 50; // добавить расходы
+let addExpenses; // добавить расходы
 
-let deposit = 100; // депозит
+let deposit; // депозит
 
-let mission = 'Цель'; // цель
+let mission; // цель
 
-let period = '6 месяцев'; // период
+let period; // период
 
-console.log(period);
+alert(money);
 
-alert('Привет, чтобы увидеть console.log открой панель разработчика');
+console.log(money);
+
