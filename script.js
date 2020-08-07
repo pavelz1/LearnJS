@@ -1,6 +1,6 @@
-// Объявим переменные
+// Объявляем переменные
 let money; // Деньги
-money = 100;
+// money = 100;
 
 let income; // доход
 
@@ -12,7 +12,7 @@ let mission; // цель
 
 let period; // период
 
-alert(money);
+alert('сообщение с любым текстом');
 
-console.log(money);
+console.log('сообщение с любым текстом');
 
