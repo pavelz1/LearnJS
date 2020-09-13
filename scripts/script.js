@@ -286,28 +286,31 @@ window.addEventListener('DOMContentLoaded', () => {
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = 'font-size: 2rem';
 
-		form.addEventListener('submit', (event) => {
+		form.addEventListener('submit', event => {
 			event.preventDefault();
 			form.append(statusMessage);
 			statusMessage.textContent = loadMessage;
+			form.reset();
 
 			const formData = new FormData(form);
-			let body = {};
+			const body = {};
 			// for (let val of formData.entries()) {
 			// 	body[val[0]] = val[1];
 			// }
 			formData.forEach((val, key) => {
 				body[key] = val;
 			});
-			postData(body, () => {
-				statusMessage.textContent = successMessage;
-			}, (error) => {
-				statusMessage.textContent = errorMessage;
-				console.log(error);
-			});
+			postData(body,
+				() => {
+					statusMessage.textContent = successMessage;
+				},
+				(error) => {
+					statusMessage.textContent = errorMessage;
+					console.error(error);
+				});
 
 		});
-		const postData = (body, outputData) => {
+		const postData = (body, outputData, errorData) => {
 			const request = new XMLHttpRequest();
 			request.addEventListener('readystatechange', () => {
 
@@ -325,10 +328,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			request.setRequestHeader('Content-Type', 'application/json');
 			// request.send(formData);
 			request.send(JSON.stringify(body));
-		}
+		};
 	};
 
 	sendForm();
+
 
 
 	//  Плавная прокрутка
@@ -347,15 +351,17 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// Data img
-	img = document.querySelector('.command__photo');
-	for (const img of document.querySelectorAll('[data-img]')) {
-		img.addEventListener('mouseover', e => {
-			event.target.src = event.target.dataset.img;
-		});
-		// img.addEventListener('mouseout', (e) => {
-		// 	event.target.src = event.target.src
-		// });
+	function hoverEffectImage() {
+	  document.querySelectorAll('[data-img]').forEach((img) => {
+	    const src = img.getAttribute('src');
+	    const srcChange = img.getAttribute('data-img');
+	
+	    img.addEventListener('mouseover', () => {img.src = srcChange;})
+	    img.addEventListener('mouseout', () => {img.src = src;})
+	  });
 	}
+
+	hoverEffectImage();
 
 
 });
